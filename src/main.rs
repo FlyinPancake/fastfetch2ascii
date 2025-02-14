@@ -42,37 +42,26 @@ fn main() {
         })
         .collect::<Vec<String>>()
         .join("\n");
-    // input = re
-    //     .replace_all(&input, |caps: &regex::Captures| {
-    //         // println!("{:?}", caps);
-    //         let colors: Vec<String> = caps
-    //             .get(0)
-    //             .unwrap()
-    //             .as_str()
-    //             .chars()
-    //             .enumerate()
-    //             .filter_map(|(ii, el)| {
-    //                 if ii % 2 == 1 {
-    //                     let idx: usize = (el.to_digit(10).unwrap() - 1).try_into().unwrap();
-    //                     Some(args.colors[idx].to_string())
-    //                 } else {
-    //                     None
-    //                 }
-    //             })
-    //             .collect();
-    //         let color = colors.join(";");
-    //         // let color = args.colors[color as usize % args.colors.len()];
-    //         format!("\x1b[{}m", color)
-    //     })
-    //     .to_string();
 
     print!("{}", input);
 }
 
 #[derive(Parser)]
 #[command(styles=get_styles())]
+/// Convert a fastfetch distro logos to plain ascii
+///
+/// This program takes a fastfetch distro logo and converts it to plain ascii.
+/// The output is returned to stdout.
 struct CliArgs {
+    /// Path to the input file
     input: PathBuf,
+    /// Colors to use
+    ///
+    /// The colors to use in the output. The colors are specified as numbers separated by spaces.
+    ///
+    /// See https://en.wikipedia.org/wiki/ANSI_escape_code#colors for the color codes.
+    ///
+    /// Example: `1 2 3 4 5 6 7 8 9 10 11 12 13 14 15`
     colors: Vec<String>,
 }
 
